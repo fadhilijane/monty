@@ -1,32 +1,31 @@
 #include "monty.h"
 
-/**
- * get_sub - function that subtracts the top two elements of the stack
- * @stack: pointer to the top of the stack
- * @line_number: where the line number appears
-i * Description: 6. sub
-* Return: see below
-* 1. upon success, nothing
-* 2. upon fail, EXIT_FAILURE
-*/
-void get_sub(stack_t **stack, unsigned int line_number)
-{
-stack_t *first, *second;
 
-if ((*stack == NULL) || ((*stack)->next == NULL))
+
+/**
+* sub - This function subtracts the top two nodes of the stack, stores it in
+* the second node, and pops off the top node
+* @stack: The stack list
+* @line_number: The line number of the file
+* Return: The edited stack
+*/
+
+stack_t *sub(stack_t **stack, unsigned int line_number)
 {
-fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
-fclose(file);
-get_free(*stack);
+int diff = 0;
+stack_t *head = *stack;
+/* Check if stack is NULL */
+if (!head || !head->next)
+{
+/* Print error, free, and exit */
+fprintf(stderr, "L%d: can't sub, stack too short\n",
+line_number);
+free_stack(stack);
 exit(EXIT_FAILURE);
 }
-else
-{
-first = *stack;
-second = first->next;
-second->n -= first->n;
-*stack = second;
-(*stack)->prev = NULL;
-free(first);
-}
+/* Sum first two nodes, and store it in second node */
+diff = (head->next->n) - (head->n);
+head->next->n = diff;
+pop(stack, 0);
+return (*stack);
 }
