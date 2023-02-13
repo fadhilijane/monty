@@ -1,39 +1,23 @@
 #include "monty.h"
 
 /**
- * get_pstr - function that prints ascii value of elements
- * @stack: pointer to head of the stack
- * @line_number: where the instruction appears
- * Description: 12. pstr
- * Return: see below
- * 1. upon success, nothing
- * 2. upon fail, EXIT_FAILURE
- */
-
-void get_pstr(stack_t **stack, unsigned int line_number)
+* pstr - This function prints the string starting at the top of
+* the stack
+* @stack: The pointer to the stack
+* @line_number: The current line number in the file
+* Return: The pointer to the stack
+*/
+stack_t *pstr(stack_t **stack,
+unsigned int line_number __attribute__((unused)))
 {
-stack_t *top_node = *stack;
-
-(void)line_number;
-
-if ((stack == NULL) || (*stack == NULL))
+stack_t *head = *stack;
+while (head)
 {
-printf("\n");
-}
-else
-{
-while (top_node != NULL)
-{
-if ((top_node->n > 0) && (isascii(top_node->n)))
-{
-printf("%c", top_node->n);
-top_node = top_node->next;
-}
-else
-{
+if (head->n < 32 || head->n > 127)
 break;
+putchar(head->n);
+head = head->next;
 }
-}
-printf("\n");
-}
+putchar('\n');
+return (*stack);
 }
