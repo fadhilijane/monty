@@ -1,35 +1,24 @@
 #include "monty.h"
 
 /**
- * get_rotl - function that rotates the tail to the top
- * @stack: pointer to the top of the stack
- * @line_number: where the line number appears
- * Description: 13. rotl
- * Return: see below
- * 1. upon success, nothing
- * 2. upon fail, EXIT_FAILURE
- */
-void get_rotl(stack_t **stack, unsigned int line_number)
-{
-stack_t *first, *last;
+* rotl - The purpose of this function is to rotate the stack to the top
+* @stack: The pointer to the top of the stack
+* @line_number: The current line number in the file
+* Return: The pointer to the stack
+*/
 
-(void)line_number;
-
-if ((*stack == NULL) || ((*stack)->next == NULL))
+stack_t *rotl(stack_t **stack,
+unsigned int line_number __attribute__ ((unused)))
 {
-;
-}
-else
-{
-first = last = *stack;
-while (last->next)
-{
-last = last->next;
-}
-*stack = first->next;
-last->next = first;
-first->prev = last;
-first->next = NULL;
+stack_t *head = *stack;
+while (!head)
+head = head->next;
+/* stack now points to the second node */
+*stack = (*stack)->next;
+head->next = (*stack)->prev;
 (*stack)->prev = NULL;
-}
+head->next->prev = head;
+head = head->next;
+head->next = NULL;
+return (*stack);
 }
