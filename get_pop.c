@@ -1,30 +1,31 @@
 #include "monty.h"
 
 /**
- * get_pop - function that pops the top element of the stack
- * @stack: pointer to the top of the stack
- * @line_number: where the line number appears
- * Description: 2. pop
- * Return: see below
- * 1. upon success, nothing
- * 2. upon fail, EXIT_FAILURE
- */
-void get_pop(stack_t **stack, unsigned int line_number)
-{
-stack_t *first;
+* pop - This function deletes the node at the top of the stack
+* @stack: Pointer to the stack
+* @line_number: Line number of the file
+* Return: Pointer to the stack
+*/
 
-if ((*stack == NULL) || (stack == NULL))
+stack_t *pop(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
-fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-fclose(file);
-get_free(*stack);
+/* Head points to head of stack */
+stack_t *head = *stack;
+/* Check if stack is NULL */
+if (*stack == NULL)
+{
+/* Print error, free, and exit */
+fprintf(stderr, "L%d: can't pop an empty stack\n",
+line_number);
+free_stack(stack);
 exit(EXIT_FAILURE);
 }
-first = *stack;
+/* Stack now points to the next node */
 *stack = (*stack)->next;
-if (first->next)
-{
-first->next->prev = NULL;
-}
-free(first);
+/* Free head node */
+free(head);
+/* If stack exists already, set it's prev pointer to NULL */
+if (*stack)
+(*stack)->prev = NULL;
+return (*stack);
 }
