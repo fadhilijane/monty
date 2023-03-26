@@ -1,4 +1,4 @@
-#define LIMIT 100
+#include "monty.h"
 
 /**
  * push - adds to the stack
