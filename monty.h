@@ -1,1 +1,2 @@
  void push();
+ void pall();
