@@ -8,7 +8,7 @@ void pall()
 {
 	int i;
 	int stack[LIMIT];
-	int top;
+			int top;
 
 	printf("The elements of the stack are: \n");
 	for(i = top; i >= 0; i--)

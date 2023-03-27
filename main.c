@@ -1,5 +1,8 @@
 #include "monty.h"
 
+int top = -1;
+int stack[LIMIT];
+
 /**
  * main - runs the code
  *
@@ -10,7 +13,6 @@ int main()
 	int choice;
 
 	printf("The stacks are:\n\n");
-	top = -1;
 
 	do
 	{
